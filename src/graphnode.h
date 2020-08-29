@@ -6,49 +6,47 @@
 #include <memory>
 #include "chatbot.h"
 
-
 // forward declarations
 class GraphEdge;
 
-class GraphNode
-{
-private:
+class GraphNode {
+ private:
 
-    // data handlers (owned)
+  // data handlers (owned)
 
-    // Edges to subsequent nodes
-    std::vector<std::unique_ptr<GraphEdge>> _childEdges;
+  // Edges to subsequent nodes
+  std::vector<std::unique_ptr<GraphEdge>> _childEdges;
 
-    // data handlers (not owned)
-    ChatBot _chatBot;
-    // Edges to the preceding nodes
-    std::vector<GraphEdge *> _parentEdges;
+  // data handlers (not owned)
+  ChatBot _chatBot;
+  // Edges to the preceding nodes
+  std::vector<GraphEdge *> _parentEdges;
 
-    // proprietary members
-    int _id;
-    std::vector<std::string> _answers;
+  // proprietary members
+  int _id;
+  std::vector<std::string> _answers;
 
-public:
-    // constructor / destructor
-    GraphNode(int id);
-    ~GraphNode();
+ public:
+  // constructor / destructor
+  GraphNode(int id);
+  ~GraphNode();
 
-    // getter / setter
-    int GetID() { return _id; }
-    int GetNumberOfChildEdges() { return _childEdges.size(); }
-    GraphEdge *GetChildEdgeAtIndex(int index);
-    std::vector<std::string> GetAnswers() { return _answers; }
-    int GetNumberOfParents() { return _parentEdges.size(); }
+  // getter / setter
+  int GetID() { return _id; }
+  int GetNumberOfChildEdges() { return _childEdges.size(); }
+  GraphEdge *GetChildEdgeAtIndex(int index);
+  std::vector<std::string> GetAnswers() { return _answers; }
+  int GetNumberOfParents() { return _parentEdges.size(); }
 
-    // proprietary functions
-    void AddToken(std::string token); // add answers to list
-    void AddEdgeToParentNode(GraphEdge *edge);
+  // proprietary functions
+  void AddToken(std::string token); // add answers to list
+  void AddEdgeToParentNode(GraphEdge *edge);
 
-    void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);
+  void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);
 
-    void MoveChatbotHere(ChatBot chatbot);
+  void MoveChatbotHere(ChatBot chatbot);
 
-    void MoveChatbotToNewNode(GraphNode *newNode);
+  void MoveChatbotToNewNode(GraphNode *newNode);
 };
 
 #endif /* GRAPHNODE_H_ */
