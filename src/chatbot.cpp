@@ -99,6 +99,8 @@ ChatBot &ChatBot::operator=(ChatBot &&source) {
   source._chatLogic = nullptr;
   source._rootNode = nullptr;
   source._image = nullptr;
+
+  return *this;
 }
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {
